@@ -13,6 +13,10 @@ void castPlayerSpell();
 void castFireBall();
 void castIceBlast();
 void castLightningBolt();
+void playerAttack();
+void dragonAbility();
+void chooseAction();
+void playerDefend();
 
 int dragonHealth = 100;
 int playerHealth = 100;
@@ -24,6 +28,8 @@ int playerSpell;
 int chargeAttack = 0;
 int randNum;
 int playerChoice;
+int defend = 0;
+int playerItem;
 
 //main
 int main() 
@@ -60,63 +66,122 @@ void dragonFight()
 		std::cout << "\nYour Health: " << playerHealth;
 		std::cout << "\nYour Mana: " << playerMana << std::endl;
 		system("pause");
-		std::cout << "\nThe dragon is casting an ability\n";
-		for (int i = 0; i < 3; i++) {
-			std::chrono::milliseconds timespan(500);
-			std::cout << ".";
-			std::this_thread::sleep_for(timespan);
-		}
-		if (chargeAttack == 0)
-		{
-			srand(time(0));
-			randNum = rand() % 3 + 1;//random number between 1 and 3
-		}
-		else
-		{
-			randNum = 4;
-		}
-		switch (randNum)
-		{
-		case 1:
-			//Charging up Fire Breath
-			chargeAttack = 1;
-			break;
-		case 2:
-			//Wing gust
-			break;
-		case 3:
-			//Razor swipe
-			break;
-		case 4:
-			//casting fire breath
-			break;
-		default:
-			break;
-		}
-		std::cout << "\nYour Health: " << playerHealth;
-		std::cout << "\nYour Mana: " << playerMana << std::endl;
-		std::cout << "\nWhat would you like to do?\n" << std::endl;
-		std::cout << std::setw(20) << std::right << "(1)" << std::setw(20) << "(2)" << std::setw(20) << "(3)" << std::setw(21) << "(4)" << std::endl;
-		std::cout << std::setw(21) << std::right << "Attack" << std::setw(20) << "Magic" << std::setw(20) << "Defend" << std::setw(20) << "Item" << std::endl;
-		std::cin >> playerChoice;
-		switch (playerChoice)
-		{
-		case 1:
-			//Attack
-			break;
-		case 2:
-			castPlayerSpell();
-			break;
-		case 3:
-			//Defend
-			break;
-		case 4:
-			//Use item
-			break;
-		default:
-			break;
-		}
+		chooseAction();
+		dragonAbility();
 	}
+}
+
+void chooseAction()
+{
+	std::cout << "\nWhat would you like to do?\n" << std::endl;
+	std::cout << std::setw(20) << std::right << "(1)" << std::setw(20) << "(2)" << std::setw(20) << "(3)" << std::setw(21) << "(4)" << std::endl;
+	std::cout << std::setw(21) << std::right << "Attack" << std::setw(20) << "Magic" << std::setw(20) << "Defend" << std::setw(20) << "Item" << std::endl;
+	std::cin >> playerChoice;
+	switch (playerChoice)
+	{
+	case 1:
+		playerAttack();
+		break;
+	case 2:
+		castPlayerSpell();
+		break;
+	case 3:
+		playerDefend();
+		break;
+	case 4:
+		//Use item
+		//std::cout << "\nYou now have " << playerHealth << " health and " << playerMana << " mana";
+		std::cout << "\nWhich item would you like to use?\n\n";
+		std::cout << std::setw(50) << std::right << "Spells and Mana Costs:" << std::endl;
+		std::cout << std::setw(22) << std::right << "(1)" << std::setw(20) << "(2)" << std::setw(18) << "(3)" << std::endl;
+		std::cout << std::setw(20) << std::right << "\tFire Ball" << std::setw(20) << "Ice Blast" << std::setw(20) << "Lightning Bolt" << std::endl;
+		std::cout << std::setw(21) << std::right << fireBall << std::setw(20) << iceBlast << std::setw(18) << lightningBolt << std::endl;
+		std::cin >> playerSpell;
+		switch (playerSpell)
+		{
+		case 1:
+			castFireBall();
+			break;
+		case 2:
+			castIceBlast();
+			break;
+		case 3:
+			castLightningBolt();
+			break;
+		default:
+			break;
+		}
+		break;
+	default:
+		break;
+	}
+}
+
+void playerDefend()
+{
+	//Defend
+	std::cout << "\nYou raise your shield and prepare for the dragon's next attack";
+	for (int i = 0; i < 3; i++) {
+		std::chrono::milliseconds timespan(500);
+		std::cout << ".";
+		std::this_thread::sleep_for(timespan);
+	}
+	defend = 1;
+}
+
+void dragonAbility()
+{
+	std::cout << "\nThe dragon is casting an ability\n";
+	for (int i = 0; i < 3; i++) {
+		std::chrono::milliseconds timespan(500);
+		std::cout << ".";
+		std::this_thread::sleep_for(timespan);
+	}
+	if (chargeAttack == 0)
+	{
+		srand(time(0));
+		randNum = rand() % 3 + 1;//random number between 1 and 3
+	}
+	else
+	{
+		randNum = 4;
+	}
+	switch (randNum)
+	{
+	case 1:
+		//Charging up Fire Breath
+		chargeAttack = 1;
+		break;
+	case 2:
+		//Wing gust
+		break;
+	case 3:
+		//Razor swipe
+		break;
+	case 4:
+		//casting fire breath
+		break;
+	default:
+		break;
+	}
+	std::cout << "\nYour Health: " << playerHealth;
+	std::cout << "\nYour Mana: " << playerMana << std::endl;
+}
+
+void playerAttack()
+{
+	//Attack
+	std::cout << "\nYou swing your sword at the dragon";
+	for (int i = 0; i < 3; i++) {
+		std::chrono::milliseconds timespan(500);
+		std::cout << ".";
+		std::this_thread::sleep_for(timespan);
+	}
+	srand(time(0));
+	randNum = rand() % 10 + 3;//range between 3 and 10;
+	std::cout << "\nYou dealt " << randNum << " damage.";
+	std::cout << "\nDragon's Health: " << dragonHealth << std::endl;
+	system("pause");
 }
 
 void castPlayerSpell()
