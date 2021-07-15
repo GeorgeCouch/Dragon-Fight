@@ -9,6 +9,7 @@
 #include <iomanip>
 
 void dragonFight();
+void castPlayerSpell();
 
 int dragonHealth = 100;
 int playerHealth = 100;
@@ -19,6 +20,7 @@ int lightningBolt = 20;
 int playerSpell;
 int chargeAttack = 0;
 int randNum;
+int playerChoice;
 
 //main
 int main() 
@@ -88,26 +90,40 @@ void dragonFight()
 		default:
 			break;
 		}
-		std::cout << "\nYou now have " << playerHealth << " health and " << playerMana << " mana";
-		std::cout << "\nWhat ability would you like to use?\n\n";
-		std::cout << std::setw(50) << std::right << "Spells and Mana Costs:" << std::endl;
-		std::cout << std::setw(22) << std::right << "(1)" << std::setw(20) << "(2)" << std::setw(18) << "(3)" << std::endl;
-		std::cout << std::setw(20) << std::right << "\tFire Ball" << std::setw(20) << "Ice Blast" << std::setw(20) << "Lightning Bolt" << std::endl;
-		std::cout << std::setw(21) << std::right << fireBall << std::setw(20) << iceBlast << std::setw(18) << lightningBolt << std::endl;
-		std::cin >> playerSpell;
-		switch (playerSpell)
+		std::cout << "\nYour Health: " << playerHealth;
+		std::cout << "\nYour Mana: " << playerMana << std::endl;
+		std::cout << "\nWhat would you like to do?\n" << std::endl;
+		std::cout << std::setw(20) << std::right << "(1)" << std::setw(20) << "(2)" << std::setw(20) << "(3)" << std::setw(21) << "(4)" << std::endl;
+		std::cout << std::setw(21) << std::right << "Attack" << std::setw(20) << "Magic" << std::setw(20) << "Defend" << std::setw(20) << "Item" << std::endl;
+		std::cin >> playerChoice;
+		if (playerChoice == 3)
 		{
-		case 1:
-			//cast ability
-			break;
-		case 2:
-			//cast ability
-			break;
-		case 3:
-			//cast ability
-			break;
-		default:
-			break;
+			castPlayerSpell();
 		}
+	}
+}
+
+void castPlayerSpell()
+{
+	//std::cout << "\nYou now have " << playerHealth << " health and " << playerMana << " mana";
+	std::cout << "\nWhich spell would you like to use?\n\n";
+	std::cout << std::setw(50) << std::right << "Spells and Mana Costs:" << std::endl;
+	std::cout << std::setw(22) << std::right << "(1)" << std::setw(20) << "(2)" << std::setw(18) << "(3)" << std::endl;
+	std::cout << std::setw(20) << std::right << "\tFire Ball" << std::setw(20) << "Ice Blast" << std::setw(20) << "Lightning Bolt" << std::endl;
+	std::cout << std::setw(21) << std::right << fireBall << std::setw(20) << iceBlast << std::setw(18) << lightningBolt << std::endl;
+	std::cin >> playerSpell;
+	switch (playerSpell)
+	{
+	case 1:
+		//cast ability
+		break;
+	case 2:
+		//cast ability
+		break;
+	case 3:
+		//cast ability
+		break;
+	default:
+		break;
 	}
 }
