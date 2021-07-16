@@ -92,10 +92,10 @@ void chooseAction()
 		//Use item
 		//std::cout << "\nYou now have " << playerHealth << " health and " << playerMana << " mana";
 		std::cout << "\nWhich item would you like to use?\n\n";
-		std::cout << std::setw(50) << std::right << "Spells and Mana Costs:" << std::endl;
-		std::cout << std::setw(22) << std::right << "(1)" << std::setw(20) << "(2)" << std::setw(18) << "(3)" << std::endl;
-		std::cout << std::setw(20) << std::right << "\tFire Ball" << std::setw(20) << "Ice Blast" << std::setw(20) << "Lightning Bolt" << std::endl;
-		std::cout << std::setw(21) << std::right << fireBall << std::setw(20) << iceBlast << std::setw(18) << lightningBolt << std::endl;
+		std::cout << std::setw(50) << std::right << "Items:" << std::endl;
+		std::cout << std::setw(22) << std::right << "(1)" << std::setw(20) << "(2)" << std::setw(18) << "(3)" << std::setw(20) << "(4)" << std::endl;
+		std::cout << std::setw(22) << std::right << "\tHealth Potion" << std::setw(18) << "Mana Elixir" << std::setw(20) << "Berserker Beer" << std::setw(20) << "Item Descriptions" << std::endl;
+		//std::cout << std::setw(21) << std::right << fireBall << std::setw(20) << iceBlast << std::setw(18) << lightningBolt << std::endl;
 		std::cin >> playerSpell;
 		switch (playerSpell)
 		{
