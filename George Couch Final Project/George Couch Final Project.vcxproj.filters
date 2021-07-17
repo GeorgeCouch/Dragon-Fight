@@ -21,14 +21,22 @@
     <ClCompile Include="Spells.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FireBall.cpp">
+    <ClCompile Include="DragonAbility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IceBlast.cpp">
+    <ClCompile Include="ItemChoices.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LightningBolt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DragonAbility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Spells.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemChoices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

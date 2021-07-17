@@ -139,11 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FireBall.cpp" />
-    <ClCompile Include="IceBlast.cpp" />
-    <ClCompile Include="LightningBolt.cpp" />
+    <ClCompile Include="DragonAbility.cpp" />
+    <ClCompile Include="ItemChoices.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Spells.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DragonAbility.h" />
+    <ClInclude Include="ItemChoices.h" />
+    <ClInclude Include="Spells.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
