@@ -36,6 +36,7 @@ int nextAttackMod = 0;
 int dragonDamage;
 int* totalMana = &playerMana;
 std::string name = "";
+int chooseOption;
 
 //main
 int main()
@@ -83,40 +84,49 @@ void introduction()
 void battle() {
 	while (dragonHealth >= 0 && playerHealth >= 0)
 	{
-		int playerCheck = 2;
-		while (playerCheck == 2)
+		chooseOption = 0;
+		while (chooseOption == 0)
 		{
-			std::cout << "\nWhat would you like to do?\n" << std::endl;
-			std::cout << std::setw(20) << std::right << "(1)" << std::setw(20) << "(2)" << std::setw(20) << "(3)" << std::setw(21) << "(4)" << std::endl;
-			std::cout << std::setw(21) << std::right << "Attack" << std::setw(20) << "Magic" << std::setw(20) << "Defend" << std::setw(20) << "Item" << std::endl;
-			std::cin >> playerChoice;
-			if (playerChoice == 1 || playerChoice == 3)
+			int playerCheck = 2;
+			while (playerCheck == 2)
 			{
-				std::cout << "\nAre you sure you want to do this action?\n\n";
-				std::cout << std::setw(55) << std::right << "(1) Yes, (2) No\n";
-				std::cin >> playerCheck;
+				std::cout << "\nWhat would you like to do?\n" << std::endl;
+				std::cout << std::setw(20) << std::right << "(1)" << std::setw(20) << "(2)" << std::setw(20) << "(3)" << std::setw(21) << "(4)" << std::endl;
+				std::cout << std::setw(21) << std::right << "Attack" << std::setw(20) << "Magic" << std::setw(20) << "Defend" << std::setw(20) << "Item" << std::endl;
+				std::cin >> playerChoice;
+				if (playerChoice == 1 || playerChoice == 3)
+				{
+					std::cout << "\nAre you sure you want to do this action?\n\n";
+					std::cout << std::setw(55) << std::right << "(1) Yes, (2) No\n";
+					std::cin >> playerCheck;
+				}
+				else
+				{
+					playerCheck = 1;
+				}
 			}
-			else
+			switch (playerChoice)
 			{
-				playerCheck = 1;
+			case 1:
+				nextAttack = playerAttack();
+				chooseOption = 1;
+				break;
+			case 2:
+				nextSpellAttack = castPlayerSpell(&playerMana);
+				chooseOption = 1;
+				break;
+			case 3:
+				defend = playerDefend();
+				chooseOption = 1;
+				break;
+			case 4:
+				nextAttackMod = itemChoices(playerHealth, playerMana);
+				chooseOption = 1;
+				break;
+			default:
+				std::cout << "\nPlease choose from one of the options\n";
+				break;
 			}
-		}
-		switch (playerChoice)
-		{
-		case 1:
-			nextAttack = playerAttack();
-			break;
-		case 2:
-			nextSpellAttack = castPlayerSpell(&playerMana);
-			break;
-		case 3:
-			defend = playerDefend();
-			break;
-		case 4:
-			nextAttackMod = itemChoices(playerHealth, playerMana);
-			break;
-		default:
-			break;
 		}
 
 		if (nextAttack != 0 && nextAttackMod == 0) {
