@@ -20,8 +20,8 @@ void introduction();
 void battle();
 
 int dragonHealth = 100;
-int playerHealth = 500;
-int playerMana = 200;
+int playerHealth = 100;
+int playerMana = 100;
 int playerSpell;
 int chargeAttack = 1;
 int randNum;
@@ -35,17 +35,24 @@ int dragonValue = 1;
 int nextAttackMod = 0;
 int dragonDamage;
 int* totalMana = &playerMana;
+std::string name = "";
 
 //main
 int main()
 {
 	introduction();
+	std::cout << "\nDragon's Health: " << dragonHealth;
+	std::cout << "\nYour Health: " << playerHealth;
+	std::cout << "\nYour Mana: " << playerMana << std::endl;
+	std::cout << "\n";
+	system("pause");
+	std::cout << "\n";
 	battle();
-	if (playerHealth == 0) {
-		std::cout << "\n\nYou were defeated by the dragon.";
+	if (playerHealth <= 0) {
+		std::cout << "\n\nYou were defeated by the dragon.\n\n\n";
 	}
 	else {
-		std::cout << "\n\nYou defeated the dragon!";
+		std::cout << "\n\nCongragulations " << name << ", you defeated the dragon!\n\n\n";
 	}
 }
 
@@ -60,7 +67,6 @@ void introduction()
 	//ask the user for their name
 	std::cout << "\nWhat is your name adventurer?\n";
 	std::cout << "\nName: ";
-	std::string name;
 	getline(std::cin, name);
 	std::cout << "\n";
 	//Greet by name
@@ -77,11 +83,6 @@ void introduction()
 void battle() {
 	while (dragonHealth > 0 && playerHealth > 0)
 	{
-		std::cout << "\nDragon's Health: " << dragonHealth;
-		std::cout << "\nYour Health: " << playerHealth;
-		std::cout << "\nYour Mana: " << playerMana << std::endl;
-		system("pause");
-
 		int playerCheck = 2;
 		while (playerCheck == 2)
 		{
@@ -91,8 +92,8 @@ void battle() {
 			std::cin >> playerChoice;
 			if (playerChoice == 1 || playerChoice == 3)
 			{
-				std::cout << "Are you sure you want to cast this spell?";
-				std::cout << "(1) Yes, (2) No";
+				std::cout << "\nAre you sure you want to do this action?\n\n";
+				std::cout << std::setw(55) << std::right << "(1) Yes, (2) No\n";
 				std::cin >> playerCheck;
 			}
 			else
@@ -126,7 +127,7 @@ void battle() {
 		}
 		else if (nextAttack != 0 && nextAttackMod != 0) {
 			std::cout << "Base Attack: " << nextAttack << std::endl;
-			std::cout << "Berserker Buff : " << nextAttackMod << std::endl;
+			std::cout << "Berserker Beer: " << nextAttackMod << std::endl;
 			dragonDamage = nextAttack + nextAttackMod;
 			std::cout << "You dealt " << dragonDamage << " damage!" << std::endl;
 			nextAttack = 0;
@@ -138,6 +139,9 @@ void battle() {
 			nextSpellAttack = 0;
 			dragonHealth -= dragonDamage;
 		}
+
+		std::cout << "\n";
+		system("pause");
 
 		if (dragonHealth <= 0) {
 			continue;
@@ -154,21 +158,24 @@ void battle() {
 		if (defend == 1)
 		{
 			dragonValue /= 2;
-			std::cout << "Dragon damage after defend: " << dragonValue << std::endl;
+			//std::cout << "Dragon damage after defend: " << dragonValue << std::endl;
 			playerHealth -= dragonValue;
 			defend = 0;
 		}
 		else if (defend == 0)
 		{
-			std::cout << "Dragon dealing normal damage\n";
+			//std::cout << "Dragon dealing normal damage\n";
 			playerHealth -= dragonValue;
 		}
-		std::cout << playerHealth;
 		if (defend == 1)
 		{
 			std::cout << "You lower your shield...\n";
 			defend = 0;
 		}
+
+		std::cout << "\nDragon's Health: " << dragonHealth;
+		std::cout << "\nYour Health: " << playerHealth;
+		std::cout << "\nYour Mana: " << playerMana << std::endl;
 	}
 }
 
@@ -182,11 +189,10 @@ int playerDefend()
 		std::this_thread::sleep_for(timespan);
 	}
 	defend = 1;
+	std::cout << "\nYour defense will cause the dragon's next attack to do half of its damage to you!";
 	std::cout << "\n";
-	system("pause");
 	return defend;
 }
-
 
 int playerAttack()
 {
@@ -200,6 +206,5 @@ int playerAttack()
 	srand(time(0));
 	randNum = rand() % 10 + 3;//range between 3 and 10;
 	std::cout << "\n";
-	system("pause");
 	return randNum;
 }

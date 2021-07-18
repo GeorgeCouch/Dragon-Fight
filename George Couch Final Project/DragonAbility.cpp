@@ -56,7 +56,7 @@ int dragonAbility(int dragonValue)
 void chargeFireBreath(int& dragonValue)
 {
 	//Charging up Fire Breath
-	std::cout << "\n\nThe dragon is charging an attack" << std::endl;
+	std::cout << "\nThe dragon is charging an attack\n" << std::endl;
 	system("pause");
 	dragonValue = 0;
 }
@@ -64,7 +64,7 @@ void chargeFireBreath(int& dragonValue)
 void wingGust(int& damage)
 {
 	//Wing gust
-	std::cout << "\n\nDragon casts wing gust!" << std::endl;
+	std::cout << "\nDragon casts wing gust!\n" << std::endl;
 	system("pause");
 	damage = 30;
 }
@@ -72,7 +72,7 @@ void wingGust(int& damage)
 void razorSwipe(int& damage)
 {
 	//Razor swipe
-	std::cout << "\n\nDragon casts razor swipe!" << std::endl;
+	std::cout << "\nDragon casts razor swipe!\n" << std::endl;
 	system("pause");
 	damage = 10;
 }
@@ -80,7 +80,7 @@ void razorSwipe(int& damage)
 void fireBreath(int& damage)
 {
 	//casting fire breath
-	std::cout << "\n\nDragon casts fire breath!" << std::endl;
+	std::cout << "\nDragon casts fire breath!\n" << std::endl;
 	system("pause");
 	damage = 60;
 }

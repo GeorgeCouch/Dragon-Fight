@@ -25,15 +25,15 @@ int castPlayerSpell(int* totalMana)
 		{
 			std::cout << "\nWhich spell would you like to cast?\n\n";
 			std::cout << std::setw(50) << std::right << "Spells and Mana Costs:" << std::endl;
-			std::cout << std::setw(22) << std::right << "(1)" << std::setw(20) << "(2)" << std::setw(18) << "(3)" << std::endl;
-			std::cout << std::setw(20) << std::right << "\tFire Ball" << std::setw(20) << "Ice Blast" << std::setw(20) << "Lightning Bolt" << std::endl;
+			std::cout << std::setw(22) << std::right << "(1)" << std::setw(20) << "(2)" << std::setw(18) << "(3)" << std::setw(19) << "(4)" << std::endl;
+			std::cout << std::setw(20) << std::right << "\tFire Ball" << std::setw(20) << "Ice Blast" << std::setw(20) << "Lightning Bolt" << std::setw(17) << "Main Menu" << std::endl;
 			std::cout << std::setw(21) << std::right << fireBall << std::setw(20) << iceBlast << std::setw(18) << lightningBolt << std::endl;
-			std::cout << "\nEnter 4 to go back to main menu.";
+			//std::cout << "\nEnter 4 to go back to main menu.";
 			std::cin >> playerSpell;
 			if (playerSpell >= 1 && playerSpell <= 3)
 			{
-				std::cout << "Are you sure you want to cast this spell?";
-				std::cout << "(1) Yes, (2) No";
+				std::cout << "\nAre you sure you want to cast this spell?\n\n";
+				std::cout << std::setw(55) << std::right << "(1) Yes, (2) No\n";
 				std::cin >> playerCheck;
 			}
 			else
@@ -96,7 +96,6 @@ int castFireBall(int* totalMana, int fireBall, int damage)
 	std::cout << "\nYou dealt " << randNum << " damage.";
 	damage = randNum;
 	std::cout << "\nFire Ball is not very effective against dragons." << std::endl;
-	system("pause");
 	return damage;
 }
 
@@ -115,7 +114,6 @@ int castIceBlast(int* totalMana, int iceBlast, int damage)
 	randNum = rand() % 10 + 15;//range between 15 and 25;
 	std::cout << "\nYou dealt " << randNum << " damage." << std::endl;
 	damage = randNum;
-	system("pause");
 	return damage;
 }
 
@@ -134,6 +132,5 @@ int castLightningBolt(int* totalMana, int lightningBolt, int damage)
 	std::cout << "\nYou dealt " << randNum << " damage.";
 	damage = randNum;
 	std::cout << "\nLightning Bolt is very effective against dragons!" << std::endl;
-	system("pause");
 	return damage;
 }
