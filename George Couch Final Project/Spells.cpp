@@ -1,16 +1,21 @@
+//includes
 #include <iostream>
 #include <iomanip>
 #include <chrono>
 #include <thread>
 
+//include h file
 #include "Spells.h"
 
+//initialize functions
 int castFireBall(int* totalMana, int fireBall, int damage);
 int castIceBlast(int* totalMana, int iceBlast, int damage);
 int castLightningBolt(int* totalMana, int lightningBolt, int damage);
 
+//castPlayerSpell function
 int castPlayerSpell(int* totalMana)
 {
+	//declare variables
 	int damage = 0;
 	int playerSpell;
 	int fireBall = 10;
@@ -18,17 +23,21 @@ int castPlayerSpell(int* totalMana)
 	int lightningBolt = 40;
 	int newDamage;
 	int keepLooping = 1;
+
+	//allow for player to choose something else if not enough mana
 	while (keepLooping == 1)
 	{
+		//allow player to be sure about choice
 		int playerCheck = 2;
 		while (playerCheck == 2)
 		{
+			//text output
 			std::cout << "\nWhich spell would you like to cast?\n\n";
 			std::cout << std::setw(50) << std::right << "Spells and Mana Costs:" << std::endl;
 			std::cout << std::setw(22) << std::right << "(1)" << std::setw(20) << "(2)" << std::setw(18) << "(3)" << std::setw(19) << "(4)" << std::endl;
 			std::cout << std::setw(20) << std::right << "\tFire Ball" << std::setw(20) << "Ice Blast" << std::setw(20) << "Lightning Bolt" << std::setw(17) << "Main Menu" << std::endl;
 			std::cout << std::setw(21) << std::right << fireBall << std::setw(20) << iceBlast << std::setw(18) << lightningBolt << std::endl;
-			//std::cout << "\nEnter 4 to go back to main menu.";
+			//ask player about their choice
 			std::cin >> playerSpell;
 			if (playerSpell >= 1 && playerSpell <= 3)
 			{
@@ -44,6 +53,7 @@ int castPlayerSpell(int* totalMana)
 		switch (playerSpell)
 		{
 		case 1:
+			//if playerMana >= fireball cost, call castFireBall and set newDamage to value returned, else let player choose another spell
 			if (*totalMana >= fireBall) {
 				newDamage = castFireBall(totalMana, fireBall, damage);
 				return newDamage;
@@ -54,6 +64,7 @@ int castPlayerSpell(int* totalMana)
 			}
 			break;
 		case 2:
+			//if playerMana >= iceBlast cost, call castIceBlast and set newDamage to value returned, else let player choose another spell
 			if (*totalMana >= iceBlast) {
 				newDamage = castIceBlast(totalMana, iceBlast, damage);
 				return newDamage;
@@ -64,6 +75,7 @@ int castPlayerSpell(int* totalMana)
 			}
 			break;
 		case 3:
+			//if playerMana >= lightningBolt cost, call castLightningBolt and set newDamage to value returned, else let player choose another spell
 			if (*totalMana >= lightningBolt) {
 				newDamage = castLightningBolt(totalMana, lightningBolt, damage);
 				return newDamage;
@@ -74,15 +86,17 @@ int castPlayerSpell(int* totalMana)
 			}
 			break;
 		default:
+			//return to main menu
 			battle();
 			break;
 		}
 	}
 }
 
+//castFireBall function
 int castFireBall(int* totalMana, int fireBall, int damage)
-{
-	//cast ability
+{	
+	//subtract mana from playerMana and get damage range. Return damage
 	int randNum;
 	std::cout << "\nYou cast Fire Ball!";
 	*totalMana -= fireBall;
@@ -101,8 +115,8 @@ int castFireBall(int* totalMana, int fireBall, int damage)
 
 int castIceBlast(int* totalMana, int iceBlast, int damage)
 {
+	//subtract mana from playerMana and get damage range. Return damage
 	int randNum;
-	//cast ability
 	std::cout << "\nYou cast Ice Blast!";
 	*totalMana -= iceBlast;
 	for (int i = 0; i < 3; i++) {
@@ -119,6 +133,7 @@ int castIceBlast(int* totalMana, int iceBlast, int damage)
 
 int castLightningBolt(int* totalMana, int lightningBolt, int damage)
 {
+	//subtract mana from playerMana and get damage range. Return damage
 	int randNum;
 	std::cout << "\nYou cast Lightning Bolt!";
 	*totalMana -= lightningBolt;

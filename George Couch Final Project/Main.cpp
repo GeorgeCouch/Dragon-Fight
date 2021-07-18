@@ -8,92 +8,75 @@
 //Allows for cout formatting
 #include <iomanip>
 
+//include other functions
 #include "DragonAbility.h"
 #include "Spells.h"
 #include "ItemChoices.h"
+#include "Introduction.h"
+#include "Ending.h"
 
+//initialize functions
 int castPlayerSpell(int* totalMana);
 int playerAttack();
 int playerDefend();
 int itemChoices(int& playerHealth, int& playerMana);
-void introduction();
 void battle();
 
+//Declare variables
 int dragonHealth = 100;
 int playerHealth = 100;
 int playerMana = 100;
-int playerSpell;
-int chargeAttack = 1;
 int randNum;
 int playerChoice;
 int defend = 0;
-int playerItem;
-int options = 1;
 int nextAttack = 0;
 int nextSpellAttack = 0;
 int dragonValue = 1;
 int nextAttackMod = 0;
 int dragonDamage;
 int* totalMana = &playerMana;
-std::string name = "";
 int chooseOption;
+std::string mainName = "";
 
 //main
 int main()
 {
-	introduction();
+	//create objects
+	ClassIntroduction objectIntroduction;
+	ClassEnding objectEnding;
+	//call introduction using object and return playerName
+	mainName = objectIntroduction.introduction();
+	//print statuses
 	std::cout << "\nDragon's Health: " << dragonHealth;
 	std::cout << "\nYour Health: " << playerHealth;
 	std::cout << "\nYour Mana: " << playerMana << std::endl;
 	std::cout << "\n";
 	system("pause");
 	std::cout << "\n";
+	//call battle function
 	battle();
-	if (playerHealth <= 0) {
-		std::cout << "\n\nYou were defeated by the dragon.\n\n\n";
-	}
-	else {
-		std::cout << "\n\nCongragulations " << name << ", you defeated the dragon!\n\n\n";
-	}
-}
-
-void introduction()
-{
-	//Description of what the program does
-	std::cout << "\n\n\t***Save us from the dragon!***\n";
-	std::cout << "\nRules:";
-	std::cout << "\n-Defeat the dragon before it defeats you.";
-	std::cout << "\n-Manage your mana when casting spells.";
-	std::cout << "\n-Consume items to obtain more power.\n";
-	//ask the user for their name
-	std::cout << "\nWhat is your name adventurer?\n";
-	std::cout << "\nName: ";
-	getline(std::cin, name);
-	std::cout << "\n";
-	//Greet by name
-	std::cout << name + ", good luck in your battle...";
-	std::cout << "\n\nThe fight is beginning";
-	for (int i = 0; i < 3; i++) {
-		std::chrono::milliseconds timespan(500);
-		std::cout << ".";
-		std::this_thread::sleep_for(timespan);
-	}
-	std::cout << "\n";
+	//call ending using object and pass playerHealth and mainName
+	objectEnding.ending(playerHealth, mainName);
 }
 
 void battle() {
+	//while dragon health and player health are >0 perform actions
 	while (dragonHealth >= 0 && playerHealth >= 0)
 	{
+		//allow player to be sure of their option
 		chooseOption = 0;
 		while (chooseOption == 0)
 		{
+			//ask the player if they are sure
 			int playerCheck = 2;
 			while (playerCheck == 2)
 			{
+				//text output for choices
 				std::cout << "\nWhat would you like to do?\n" << std::endl;
 				std::cout << std::setw(20) << std::right << "(1)" << std::setw(20) << "(2)" << std::setw(20) << "(3)" << std::setw(21) << "(4)" << std::endl;
 				std::cout << std::setw(21) << std::right << "Attack" << std::setw(20) << "Magic" << std::setw(20) << "Defend" << std::setw(20) << "Item" << std::endl;
 				std::cin >> playerChoice;
+				//ask player if they're sure of their choice
 				if (playerChoice == 1 || playerChoice == 3)
 				{
 					std::cout << "\nAre you sure you want to do this action?\n\n";
@@ -108,18 +91,22 @@ void battle() {
 			switch (playerChoice)
 			{
 			case 1:
+				//call playerAttack and set return value to next attack
 				nextAttack = playerAttack();
 				chooseOption = 1;
 				break;
 			case 2:
+				//call castPlayerSpell and pass pointer. Set return value to nextSpellAttack
 				nextSpellAttack = castPlayerSpell(&playerMana);
 				chooseOption = 1;
 				break;
 			case 3:
+				//call playerDefend and set defend to returned value
 				defend = playerDefend();
 				chooseOption = 1;
 				break;
 			case 4:
+				//call itemChoices and pass playerHealth and playerMana, set nextAttackMod to returned value
 				nextAttackMod = itemChoices(playerHealth, playerMana);
 				chooseOption = 1;
 				break;
@@ -129,12 +116,14 @@ void battle() {
 			}
 		}
 
+		//perform normal attack if nextAttackMod = 0
 		if (nextAttack != 0 && nextAttackMod == 0) {
 			dragonDamage = nextAttack;
 			std::cout << "You dealt " << dragonDamage << " damage!" << std::endl;
 			nextAttack = 0;
 			dragonHealth -= dragonDamage;
 		}
+		//perform bonus attack if nextAttackMod !=0 (berserker beer consumed)
 		else if (nextAttack != 0 && nextAttackMod != 0) {
 			std::cout << "Base Attack: " << nextAttack << std::endl;
 			std::cout << "Berserker Beer: " << nextAttackMod << std::endl;
@@ -144,6 +133,7 @@ void battle() {
 			nextAttackMod = 0;
 			dragonHealth -= dragonDamage;
 		}
+		//perform if spell is cast
 		else if (nextSpellAttack != 0) {
 			dragonDamage = nextSpellAttack;
 			nextSpellAttack = 0;
@@ -153,10 +143,12 @@ void battle() {
 		std::cout << "\n";
 		system("pause");
 
+		//if dragon health is >= 0 then end battle()
 		if (dragonHealth <= 0) {
 			break;
 		}
 
+		//call dragonAbility and pass dragonValue, return dragon value, dragon Value determines if ability is being "charged"
 		if (dragonValue >= 1)
 		{
 			dragonValue = dragonAbility(dragonValue);
@@ -165,37 +157,41 @@ void battle() {
 		{
 			dragonValue = dragonAbility(dragonValue);
 		}
+		//divide incoming damage in half it player is defending
 		if (defend == 1)
 		{
 			dragonValue /= 2;
-			//std::cout << "Dragon damage after defend: " << dragonValue << std::endl;
 			playerHealth -= dragonValue;
 			defend = 0;
 		}
 		else if (defend == 0)
 		{
-			//std::cout << "Dragon dealing normal damage\n";
 			playerHealth -= dragonValue;
 		}
+
+		//lower player's defense after dragon attack
 		if (defend == 1)
 		{
 			std::cout << "You lower your shield...\n";
 			defend = 0;
 		}
 
+		//if playerHealth <= 0 end battle()
 		if (playerHealth <= 0) {
 			break;
 		}
 
+		//print statuses
 		std::cout << "\nDragon's Health: " << dragonHealth;
 		std::cout << "\nYour Health: " << playerHealth;
 		std::cout << "\nYour Mana: " << playerMana << std::endl;
 	}
 }
 
+//playerDefend function
 int playerDefend()
 {
-	//Defend
+	//text output and set defense to 1
 	std::cout << "\nYou raise your shield and prepare for the dragon's next attack";
 	for (int i = 0; i < 3; i++) {
 		std::chrono::milliseconds timespan(500);
@@ -208,9 +204,10 @@ int playerDefend()
 	return defend;
 }
 
+//playerAttack function
 int playerAttack()
 {
-	//Attack
+	//text output and set randNum to random value between 3 and 10. Will be what damages the dragon.
 	std::cout << "\nYou swing your sword at the dragon";
 	for (int i = 0; i < 3; i++) {
 		std::chrono::milliseconds timespan(500);

@@ -1,26 +1,34 @@
+//includes
 #include <iostream>
 #include <chrono>
 #include <thread>
 
+//include .h
 #include "DragonAbility.h";
 
+//initialize functions
 void chargeFireBreath(int& dragonValue);
 void wingGust(int& damage);
 void razorSwipe(int& damage);
 void fireBreath(int& damage);
 
+//dragonAbility function
 int dragonAbility(int dragonValue)
 {
+	//declare variables
 	int damage;
 	int randNum;
 
-	// Change this to be an inherited something
+	// text output
 	std::cout << "\nThe dragon is casting an ability";
 	for (int i = 0; i < 3; i++) {
 		std::chrono::milliseconds timespan(500);
 		std::cout << ".";
 		std::this_thread::sleep_for(timespan);
 	}
+
+	// if dragonValue is greater than 1, get random number, else randNum = 4
+	// This allows dragon to charge an attack for a turn if it lands on 1
 	if (dragonValue >= 1)
 	{
 		srand(time(0));
@@ -30,6 +38,8 @@ int dragonAbility(int dragonValue)
 	{
 		randNum = 4;
 	}
+
+	//switch for randNum to determine which ability the dragon uses
 	switch (randNum)
 	{
 	case 1:
@@ -53,6 +63,7 @@ int dragonAbility(int dragonValue)
 	}
 }
 
+//passes reference of dragon value "charges" next attack by setting dragon value to 0
 void chargeFireBreath(int& dragonValue)
 {
 	//Charging up Fire Breath
@@ -61,6 +72,7 @@ void chargeFireBreath(int& dragonValue)
 	dragonValue = 0;
 }
 
+//passes reference of damage to set it equal to 30
 void wingGust(int& damage)
 {
 	//Wing gust
@@ -69,6 +81,7 @@ void wingGust(int& damage)
 	damage = 30;
 }
 
+//passes reference of damage to set it equal to 10
 void razorSwipe(int& damage)
 {
 	//Razor swipe
@@ -77,6 +90,7 @@ void razorSwipe(int& damage)
 	damage = 10;
 }
 
+//passes reference of damage to set it equal to 60
 void fireBreath(int& damage)
 {
 	//casting fire breath

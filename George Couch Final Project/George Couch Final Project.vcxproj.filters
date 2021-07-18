@@ -27,6 +27,12 @@
     <ClCompile Include="ItemChoices.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Introduction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ending.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DragonAbility.h">
@@ -36,6 +42,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ItemChoices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Introduction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ending.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
