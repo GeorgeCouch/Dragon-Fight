@@ -81,7 +81,7 @@ void introduction()
 }
 
 void battle() {
-	while (dragonHealth > 0 && playerHealth > 0)
+	while (dragonHealth >= 0 && playerHealth >= 0)
 	{
 		int playerCheck = 2;
 		while (playerCheck == 2)
@@ -144,7 +144,7 @@ void battle() {
 		system("pause");
 
 		if (dragonHealth <= 0) {
-			continue;
+			break;
 		}
 
 		if (dragonValue >= 1)
@@ -171,6 +171,10 @@ void battle() {
 		{
 			std::cout << "You lower your shield...\n";
 			defend = 0;
+		}
+
+		if (playerHealth <= 0) {
+			break;
 		}
 
 		std::cout << "\nDragon's Health: " << dragonHealth;

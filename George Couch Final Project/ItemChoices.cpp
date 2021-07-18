@@ -84,11 +84,11 @@ int itemChoices(int& playerHealth, int& playerMana)
 					std::cout << ".";
 					std::this_thread::sleep_for(timespan);
 				}
-				playerHealth += 30;
+				playerHealth += 50;
 				if (playerHealth > 100) {
 					playerHealth = 100;
 				}
-				std::cout << "\nYou gained 30 health!";
+				std::cout << "\nYou gained 50 health!";
 				std::cout << "\nYour Health: " << playerHealth << std::endl;
 				options = 0;
 				return nextAttackMod;

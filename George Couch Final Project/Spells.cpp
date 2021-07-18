@@ -13,9 +13,9 @@ int castPlayerSpell(int* totalMana)
 {
 	int damage = 0;
 	int playerSpell;
-	int fireBall = 30;
-	int iceBlast = 10;
-	int lightningBolt = 20;
+	int fireBall = 10;
+	int iceBlast = 20;
+	int lightningBolt = 40;
 	int newDamage;
 	int keepLooping = 1;
 	while (keepLooping == 1)
