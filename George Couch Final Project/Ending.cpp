@@ -8,9 +8,11 @@
 void ClassEnding::ending(int playerHealth, std::string mainName) {
 	//if check to determine if player won or lost
 	if (playerHealth <= 0) {
-		std::cout << "\n\nYou were defeated by the dragon.\n\n\n";
+		std::cout << "\n\nYou were defeated by the dragon.\n\n";
 	}
 	else {
-		std::cout << "\n\nCongragulations " << mainName << ", you defeated the dragon!\n\n\n";
+		std::cout << "\n\nCongragulations " << mainName << ", you defeated the dragon!\n\n";
 	}
+	//Exit program
+	exit(0);
 }

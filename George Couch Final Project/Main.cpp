@@ -32,18 +32,19 @@ int defend = 0;
 int nextAttack = 0;
 int nextSpellAttack = 0;
 int dragonValue = 1;
-int nextAttackMod = 0;
+int attackMod = 0;
 int dragonDamage;
 int* totalMana = &playerMana;
 int chooseOption;
 std::string mainName = "";
 
+//create objects
+ClassIntroduction objectIntroduction;
+ClassEnding objectEnding;
+
 //main
 int main()
 {
-	//create objects
-	ClassIntroduction objectIntroduction;
-	ClassEnding objectEnding;
 	//call introduction using object and return playerName
 	mainName = objectIntroduction.introduction();
 	//print statuses
@@ -55,8 +56,7 @@ int main()
 	std::cout << "\n";
 	//call battle function
 	battle();
-	//call ending using object and pass playerHealth and mainName
-	objectEnding.ending(playerHealth, mainName);
+	return 0;
 }
 
 void battle() {
@@ -107,7 +107,7 @@ void battle() {
 				break;
 			case 4:
 				//call itemChoices and pass playerHealth and playerMana, set nextAttackMod to returned value
-				nextAttackMod = itemChoices(playerHealth, playerMana);
+				attackMod = itemChoices(playerHealth, playerMana);
 				chooseOption = 1;
 				break;
 			default:
@@ -117,20 +117,20 @@ void battle() {
 		}
 
 		//perform normal attack if nextAttackMod = 0
-		if (nextAttack != 0 && nextAttackMod == 0) {
+		if (nextAttack != 0 && attackMod == 0) {
 			dragonDamage = nextAttack;
 			std::cout << "You dealt " << dragonDamage << " damage!" << std::endl;
 			nextAttack = 0;
 			dragonHealth -= dragonDamage;
 		}
 		//perform bonus attack if nextAttackMod !=0 (berserker beer consumed)
-		else if (nextAttack != 0 && nextAttackMod != 0) {
+		else if (nextAttack != 0 && attackMod != 0) {
 			std::cout << "Base Attack: " << nextAttack << std::endl;
-			std::cout << "Berserker Beer: " << nextAttackMod << std::endl;
-			dragonDamage = nextAttack + nextAttackMod;
+			std::cout << "Berserker Beer: " << attackMod << std::endl;
+			dragonDamage = nextAttack + attackMod;
 			std::cout << "You dealt " << dragonDamage << " damage!" << std::endl;
 			nextAttack = 0;
-			nextAttackMod = 0;
+			attackMod = 0;
 			dragonHealth -= dragonDamage;
 		}
 		//perform if spell is cast
@@ -145,7 +145,8 @@ void battle() {
 
 		//if dragon health is >= 0 then end battle()
 		if (dragonHealth <= 0) {
-			break;
+			//call ending using object and pass playerHealth and mainName
+			objectEnding.ending(playerHealth, mainName);
 		}
 
 		//call dragonAbility and pass dragonValue, return dragon value, dragon Value determines if ability is being "charged"
@@ -178,7 +179,8 @@ void battle() {
 
 		//if playerHealth <= 0 end battle()
 		if (playerHealth <= 0) {
-			break;
+			//call ending using object and pass playerHealth and mainName
+			objectEnding.ending(playerHealth, mainName);
 		}
 
 		//print statuses

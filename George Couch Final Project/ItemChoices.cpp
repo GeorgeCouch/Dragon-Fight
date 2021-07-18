@@ -9,14 +9,16 @@
 
 //declare array
 int arr[3] = { 0, 1, 2 };
+int nextAttackMod = 0;
 
 //itemChoices function that takes the references of playerHealth and playerMana
 int itemChoices(int& playerHealth, int& playerMana)
 {
 	//declare variables
-	int nextAttackMod = 0;
+
 	int playerItem;
 	int playerCheck = 2;
+
 	//check for player to say they're sure about their decision
 	while (playerCheck == 2)
 	{
@@ -98,7 +100,9 @@ int itemChoices(int& playerHealth, int& playerMana)
 		}
 		else
 		{
-			std::cout << "You've already consumed this item.";
+			//return to main menu if item has already been consumed
+			std::cout << "\nYou've already consumed this item.\n";
+			battle();
 		}
 		break;
 	case 2:
@@ -121,7 +125,9 @@ int itemChoices(int& playerHealth, int& playerMana)
 			return nextAttackMod;
 		}
 		else {
-			std::cout << "You've already consumed this item.";
+			//return to main menu if item has already been consumed
+			std::cout << "\nYou've already consumed this item.\n";
+			battle();
 		}
 		break;
 	case 3:
@@ -141,15 +147,18 @@ int itemChoices(int& playerHealth, int& playerMana)
 		}
 		else
 		{
-			std::cout << "You've already consumed this item.";
+			//return to main menu if item has already been consumed
+			std::cout << "\nYou've already consumed this item.\n";
+			battle();
 		}
 		break;
 	case 4:
 		//print item descriptions
 		std::cout << "\nHealth Potion: Consume to gain back 30 health." << std::endl;
 		std::cout << "\nMana Elixir: Consume to gain back 30 mana." << std::endl;
-		std::cout << "\nBerserker Beer: Consume to gain significantly more attack damage fo a turn.\n" << std::endl;
+		std::cout << "\nBerserker Beer: Consume to gain significantly more attack damage for a turn.\n" << std::endl;
 		system("pause");
+		battle();
 		break;
 	default:
 		//send player back to main menu

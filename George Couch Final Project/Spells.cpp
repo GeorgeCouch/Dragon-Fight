@@ -60,7 +60,9 @@ int castPlayerSpell(int* totalMana)
 			}
 			else
 			{
+				//return to main menu if not enough mana
 				std::cout << "You don't have enough mana to cast this spell.\n";
+				battle();
 			}
 			break;
 		case 2:
@@ -71,7 +73,9 @@ int castPlayerSpell(int* totalMana)
 			}
 			else
 			{
+				//return to main menu if not enough mana
 				std::cout << "You don't have enough mana to cast this spell.\n";
+				battle();
 			}
 			break;
 		case 3:
@@ -82,7 +86,9 @@ int castPlayerSpell(int* totalMana)
 			}
 			else
 			{
-				std::cout << "You don't have enough mana to cast this spell.\n";
+				//return to main menu if not enough mana
+				std::cout << "\nYou don't have enough mana to cast this spell.\n";
+				battle();
 			}
 			break;
 		default:
